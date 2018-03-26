@@ -17,7 +17,7 @@ users = {}
 def handle(msg):
   content_type, chat_type, chat_id = telepot.glance(msg)
   msg_id = telepot.message_identifier(msg)
-  if 'group' in chat_type:
+  if chat_type not in ['group', 'supergroup']:
     return
 
   # Group is read-only before 7 oclock
@@ -28,14 +28,19 @@ def handle(msg):
 
   # Any GIF sent to the group should be removed
   if content_type == 'document' and msg['document']['mime_type'] == 'video/mp4':
-    bot.deleteMessage(telepot.message_identifier(msg))
+    bot.deleteMessage(msg_id)
+    return
+
+  # Also no sticker
+  if content_type == 'sticker':
+    bot.deleteMessage(msg_id)
     return
 
   # Any post contaning hot words should also be removed
   if content_type == 'text':
     for word in hot_words:
       if word.lower() in msg['text'].lower():
-        bot.deleteMessage(telepot.message_identifier(msg))
+        bot.deleteMessage(msg_id)
         return
 
   # Delete all messages sent from a user in a short period of time
