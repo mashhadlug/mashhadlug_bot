@@ -18,7 +18,8 @@ users = {}
 def handle(msg):
   content_type, chat_type, chat_id = telepot.glance(msg)
   msg_id = telepot.message_identifier(msg)
-  if chat_type != 'group':
+  pprint(msg)
+  if 'group' in chat_type:
     return
 
   # Group is read-only before 7 oclock
