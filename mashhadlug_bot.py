@@ -1,5 +1,4 @@
 import telepot
-from pprint import pprint
 from telepot.loop import MessageLoop
 from pytz import timezone
 from datetime import datetime
@@ -18,7 +17,6 @@ users = {}
 def handle(msg):
   content_type, chat_type, chat_id = telepot.glance(msg)
   msg_id = telepot.message_identifier(msg)
-  pprint(msg)
   if 'group' in chat_type:
     return
 
