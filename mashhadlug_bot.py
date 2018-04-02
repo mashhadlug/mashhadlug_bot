@@ -1,6 +1,7 @@
 import telepot
 from telepot.loop import MessageLoop
 from datetime import datetime
+from time import time
 
 BOT_TOKEN_KEY = 'TOKEN'
 BURST_THRESHOLD_SECS = 5
