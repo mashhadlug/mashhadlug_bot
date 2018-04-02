@@ -1,16 +1,14 @@
 import telepot
 from telepot.loop import MessageLoop
-from pytz import timezone
 from datetime import datetime
-from time import time
 
 BOT_TOKEN_KEY = 'TOKEN'
 BURST_THRESHOLD_SECS = 5
 USER_MAXIMUM_BURST_POSTS = 3
-READONLY_TIME_HOUR = 7
+READONLY_TIME_HOUR_START = 2
+READONLY_TIME_HOUR_END = 6
 
 bot = telepot.Bot(BOT_TOKEN_KEY)
-tz = timezone('Asia/Tehran')
 hot_words = ('foo', 'bar')
 users = {}
 
@@ -20,9 +18,9 @@ def handle(msg):
   if chat_type not in ['group', 'supergroup']:
     return
 
-  # Group is read-only before 7 oclock
-  now = datetime.now(tz)
-  if now.hour <= READONLY_TIME_HOUR:
+  # Group is read-only between 2 to 7 o'clock in the morning
+  msg_date = datetime.fromtimestamp(msg['date'])
+  if msg_date.hour >= READONLY_TIME_HOUR_START and msg_date.hour <= READONLY_TIME_HOUR_END:
     bot.deleteMessage(telepot.message_identifier(msg))
     return
 
