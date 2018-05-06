@@ -1,7 +1,7 @@
 import telepot
 from telepot.loop import MessageLoop
 from datetime import datetime
-from time import time
+from time import time, sleep
 
 BOT_TOKEN_KEY = 'TOKEN'
 BURST_THRESHOLD_SECS = 5
@@ -61,3 +61,5 @@ def handle(msg):
 
 
 MessageLoop(bot, handle).run_as_thread()
+while True:
+    sleep(10)
