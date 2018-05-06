@@ -1,4 +1,5 @@
 import telepot
+from pprint import pprint
 from telepot.loop import MessageLoop
 from datetime import datetime
 from time import time, sleep
@@ -16,6 +17,7 @@ users = {}
 def handle(msg):
   content_type, chat_type, chat_id = telepot.glance(msg)
   msg_id = telepot.message_identifier(msg)
+  pprint(msg)
   if chat_type not in ['group', 'supergroup']:
     return
 
