@@ -1,0 +1,15 @@
+[Unit]
+Description=MashhadLUG Bot
+
+[Service]
+Type=simple
+WorkingDirectory=/home/rumple/www/mashhadlug_bot/
+ExecStart=/home/rumple/www/mashhadlug_bot/mashhadlug_bot.py
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+TimeoutStartSec=5
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
