@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import telepot
 from pprint import pprint
 from telepot.loop import MessageLoop
